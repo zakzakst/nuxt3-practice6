@@ -1,0 +1,278 @@
+openapi: 3.1.0
+info:
+  title: TODO API
+  version: 1.0.0
+
+paths:
+  /todos:
+    get:
+      operationId: getTodos
+      summary: TODOリストを取得する
+      responses:
+        "200":
+          description: データ取得成功
+          content:
+            application/json:
+              schema:
+                items:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Todo"
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    post:
+      operationId: postTodo
+      summary: TODOデータを登録する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  description: タイトル
+                  type: string
+                detail:
+                  description: 詳細（マークダウン形式のテキスト）
+                  type: string
+                deadline:
+                  description: 期日
+                  type: string
+                  format: date-time
+      responses:
+        "200":
+          description: データ登録成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Todo"
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /todos/{id}:
+    get:
+      operationId: getTodo
+      summary: TODOデータを取得する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: データ取得成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Todo"
+        # NOTE: ユーザー認証機能がなく、利用ケースがないため、不要。今後の練習で認証機能つけるアプリ作るときのために、コメントアウトで残しておく
+        # "401":
+        #   description: データ取得権限がない
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 該当データが存在しない
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    put:
+      operationId: updateTodo
+      summary: TODOデータを更新する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  description: タイトル
+                  type: string
+                detail:
+                  description: 詳細（マークダウン形式のテキスト）
+                  type: string
+                deadline:
+                  description: 期日
+                  type: string
+                  format: date-time
+                status:
+                  description: 進捗ステータス
+                  type: string
+                  enum:
+                    - completed
+                    - progress
+                    - planned
+      responses:
+        "200":
+          description: データ更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Todo"
+        # NOTE: ユーザー認証機能がなく、利用ケースがないため、不要。今後の練習で認証機能つけるアプリ作るときのために、コメントアウトで残しておく
+        # "401":
+        #   description: データ更新権限がない
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 該当データが存在しない
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    delete:
+      operationId: deleteTodo
+      summary: TODOデータを削除する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: データ削除成功
+        # NOTE: ユーザー認証機能がなく、利用ケースがないため、不要。今後の練習で認証機能つけるアプリ作るときのために、コメントアウトで残しておく
+        # "401":
+        #   description: データ削除権限がない
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 該当データが存在しない
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    Todo:
+      description: TODOデータ
+      type: object
+      properties:
+        id:
+          description: ID
+          type: integer
+        title:
+          description: タイトル
+          type: string
+        detail:
+          description: 詳細（マークダウン形式のテキスト）
+          type: string
+        deadline:
+          description: 期日
+          type: string
+          format: date-time
+        status:
+          description: 進捗ステータス
+          type: string
+          enum:
+            - completed
+            - progress
+            - planned
+        createdAt:
+          description: 作成日時
+          type: string
+          format: date-time
+        updatedAt:
+          description: 更新日時
+          type: string
+          format: date-time
+      example:
+        id: 1
+        title: 夕飯の材料を買う
+        deadline: 2025-12-31T03:04:30.155Z
+        detail: >
+          - 肉
+          - 人参
+          - 醤油
+        status: completed
+        createdAt: 2025-12-25T03:04:30.155Z
+        updatedAt: 2025-12-26T03:04:30.155Z
+
+    TodosListItem:
+      description: TODOリスト項目
+      type: object
+      properties:
+        id:
+          description: ID
+          type: integer
+        title:
+          description: タイトル
+          type: string
+        deadline:
+          description: 期日
+          type: string
+          format: date-time
+        status:
+          description: 進捗ステータス
+          type: string
+          enum:
+            - completed
+            - progress
+            - planned
+        createdAt:
+          description: 作成日時
+          type: string
+          format: date-time
+        updatedAt:
+          description: 更新日時
+          type: string
+          format: date-time
+      example:
+        id: 1
+        title: 夕飯の材料を買う
+        deadline: 2025-12-31T03:04:30.155Z
+        status: completed
+        createdAt: 2025-12-25T03:04:30.155Z
+        updatedAt: 2025-12-26T03:04:30.155Z
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: エラーが発生しました
