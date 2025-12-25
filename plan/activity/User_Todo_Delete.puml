@@ -1,0 +1,25 @@
+@startuml
+title TODO削除：アクティビティ図
+
+legend
+ユースケース名：TODO削除
+ユースケース番号：User_Todo_Delete
+end legend
+
+|User|
+start
+:削除実行;
+
+|アプリ|
+:TODO削除;
+
+if (削除成功?) then (Yes)
+  |User|
+  :TODOリストに遷移;
+  stop
+else (No)
+  :エラー表示;
+  stop
+endif
+
+@enduml

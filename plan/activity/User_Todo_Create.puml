@@ -1,0 +1,27 @@
+@startuml
+title TODO作成：アクティビティ図
+
+legend
+ユースケース名：TODO作成
+ユースケース番号：User_Todo_Create
+end legend
+
+|User|
+start
+:作成フォームにアクセス;
+:フォーム入力;
+:フォーム実行;
+
+|アプリ|
+:TODO作成;
+
+if (作成成功?) then (Yes)
+  |User|
+  :TODOリストに遷移;
+  stop
+else (No)
+  :エラー表示;
+  stop
+endif
+
+@enduml
