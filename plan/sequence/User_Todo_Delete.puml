@@ -1,0 +1,21 @@
+@startuml
+title TODO削除：シーケンス図
+
+legend
+ユースケース名：TODO削除
+ユースケース番号：User_Todo_Delete
+end legend
+
+participant User
+participant "Browser" as B
+participant "Backend API" as API
+database DB
+
+User -> B: TODO削除実行
+B -> API: DELETE /todos/:id
+API -> DB: TODO削除
+DB --> API: 削除成功
+API --> B: JSON
+B --> User: TODOリストに遷移
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+title TODOリスト確認：シーケンス図
+
+legend
+ユースケース名：TODOリスト確認
+ユースケース番号：User_TodoList_Read
+end legend
+
+participant User
+participant "Browser" as B
+participant "Backend API" as API
+database DB
+
+User -> B: TODOリストにアクセス
+B -> API: GET /todos
+API -> DB: TODOリスト取得
+DB --> API: TODOリストデータ
+API --> B: JSON
+B --> User: 画面反映
+
+@enduml

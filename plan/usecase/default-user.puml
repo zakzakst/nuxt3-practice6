@@ -1,0 +1,25 @@
+@startuml
+title ユースケース図
+
+legend
+目的：TODOアプリの機能の全体像を示す
+対象：通常ユーザー
+end legend
+
+actor "通常ユーザー" as User
+
+rectangle "TODO管理" {
+    usecase "TODOリスト確認" as User_TodoList_Read
+    usecase "TODO作成" as User_Todo_Create
+    usecase "TODO更新" as User_Todo_Update
+    usecase "TODO確認" as User_Todo_Read
+    usecase "TODO削除" as User_Todo_Delete
+}
+
+User --> User_TodoList_Read
+User --> User_Todo_Create
+User --> User_Todo_Update
+User --> User_Todo_Read
+User --> User_Todo_Delete
+
+@enduml

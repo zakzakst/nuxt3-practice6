@@ -1,0 +1,23 @@
+@startuml
+title TODO更新：シーケンス図
+
+legend
+ユースケース名：TODO更新
+ユースケース番号：User_Todo_Update
+end legend
+
+participant User
+participant "Browser" as B
+participant "Backend API" as API
+database DB
+
+User -> B: 更新フォームにアクセス
+B --> User: 画面反映
+User -> B: フォーム実行
+B -> API: PUT /todos/:id
+API -> DB: TODO更新
+DB --> API: TODOデータ
+API --> B: JSON
+B --> User: TODO詳細に遷移
+
+@enduml
