@@ -5,6 +5,7 @@
   //   "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
   //   "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .oxlint*, oxlint*, .prettier*, prettier*, .editorconfig"
   // },
+  "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": ["clsx", "enduml", "nuxt", "startuml"]
