@@ -1,0 +1,25 @@
+@startuml
+title TODO確認：アクティビティ図
+
+legend
+ユースケース名：TODO確認
+ユースケース番号：User_Todo_Read
+end legend
+
+|User|
+start
+:TODO表示にアクセス;
+
+|アプリ|
+:TODOデータ取得;
+
+if (データ取得成功?) then (Yes)
+  |User|
+  :TODO表示;
+  stop
+else (No)
+  :エラー表示;
+  stop
+endif
+
+@enduml

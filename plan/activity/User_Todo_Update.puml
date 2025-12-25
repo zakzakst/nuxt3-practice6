@@ -1,0 +1,27 @@
+@startuml
+title TODO更新：アクティビティ図
+
+legend
+ユースケース名：TODO更新
+ユースケース番号：User_Todo_Update
+end legend
+
+|User|
+start
+:更新フォームにアクセス;
+:フォーム入力;
+:フォーム実行;
+
+|アプリ|
+:TODO更新;
+
+if (更新成功?) then (Yes)
+  |User|
+  :TODO表示に遷移;
+  stop
+else (No)
+  :エラー表示;
+  stop
+endif
+
+@enduml
