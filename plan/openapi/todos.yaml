@@ -17,7 +17,7 @@ paths:
                 items:
                   type: array
                   items:
-                    $ref: "#/components/schemas/Todo"
+                    $ref: "#/components/schemas/TodosItem"
         "500":
           description: サーバーエラー
           content:
@@ -232,7 +232,7 @@ components:
         createdAt: 2025-12-25T03:04:30.155Z
         updatedAt: 2025-12-26T03:04:30.155Z
 
-    TodosListItem:
+    TodosItem:
       description: TODOリスト項目
       type: object
       properties:
