@@ -1,0 +1,23 @@
+@startuml
+title TODO作成：シーケンス図
+
+legend
+ユースケース名：TODO作成
+ユースケース番号：User_Todo_Create
+end legend
+
+participant User
+participant "Browser" as B
+participant "Backend API" as API
+database DB
+
+User -> B: 作成フォームにアクセス
+B --> User: 画面反映
+User -> B: フォーム実行
+B -> API: POST /todos
+API -> DB: TODO作成
+DB --> API: TODOデータ
+API --> B: JSON
+B --> User: TODOリストに遷移
+
+@enduml
