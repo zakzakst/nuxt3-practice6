@@ -10,11 +10,11 @@ const { getTodos } = useTodos2();
 //   console.log("watch");
 // });
 
-const { data, pending, refresh } = getTodos();
+const { data, pending, refresh } = await getTodos();
 
-onMounted(() => {
-  refresh();
-});
+// onMounted(() => {
+//   refresh();
+// });
 </script>
 
 <template>
