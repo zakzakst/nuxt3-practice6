@@ -8,7 +8,7 @@ import type {
   PutTodoRequest,
   PutTodoResponse,
 } from "~/types/todos";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 // import { useFetch } from "nuxt/app";
 import { useAsyncData, useFetch } from "nuxt/app";
 import { host } from "~/utils/host";
@@ -34,15 +34,26 @@ export const useTodos = () => {
   };
 };
 
+type getTodoParams = {
+  keyword?: string;
+};
+
+// export const useTodos2 = (params: Ref<getTodoParams>) => {
 export const useTodos2 = () => {
+  const params = ref<getTodoParams | null>(null);
+
   const getTodos = () => {
     const asyncData = useFetch<GetTodosResponse>(host("/todos"), {
       key: "getTodos",
+      query: computed(() => ({
+        ...params.value,
+      })),
     });
     return asyncData;
   };
 
   return {
+    params,
     getTodos,
   };
 };
