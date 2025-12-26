@@ -8,5 +8,13 @@
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": ["clsx", "enduml", "nuxt", "startuml"]
+  "cSpell.words": [
+    "clsx",
+    "enduml",
+    "lucide",
+    "nuxt",
+    "reka",
+    "startuml",
+    "vueuse"
+  ]
 }
