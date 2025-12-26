@@ -9,7 +9,8 @@ import type {
   PutTodoResponse,
 } from "~/types/todos";
 import { ref } from "vue";
-import { useFetch } from "nuxt/app";
+// import { useFetch } from "nuxt/app";
+import { useAsyncData } from "nuxt/app";
 import { host } from "~/utils/host";
 // import { useHost as host } from "~/composables/useHost";
 
@@ -17,9 +18,13 @@ export const useTodos = () => {
   const todos = ref<TodosItem[] | null>(null);
 
   const getTodos = async () => {
-    const asyncData = await useFetch<GetTodosResponse>(host("/todos"), {
-      key: "getTodos",
-    });
+    // const asyncData = await useFetch<GetTodosResponse>(host("/todos"), {
+    //   key: "getTodos",
+    // });
+    const asyncData = await useAsyncData<GetTodosResponse>("getTodos", () =>
+      $fetch(host("/todos"))
+    );
+    console.log("test", asyncData);
     todos.value = asyncData.data.value?.items || null;
   };
 

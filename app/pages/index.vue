@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import UiInput from "~/components/ui/input/UiInput.vue";
 import { useTodos, useTodo } from "~/composables/useTodos";
 
 const { todos, getTodos } = useTodos();
@@ -24,8 +23,21 @@ onMounted(() => {
     <button @click="deleteTodo(1)">delete</button>
   </div>
   <div>{{ JSON.stringify(todo) }}</div>
-  <UiButton variant="secondary" size="lg">test</UiButton>
+  <UiButton variant="secondary" size="lg" as-child>
+    <a href="/">link</a>
+  </UiButton>
   <UiInput v-model="inputValue" />
   <div>{{ inputValue }}</div>
-  <!-- <Button>test</Button> -->
+  <UiSelect>
+    <UiSelectTrigger>
+      <UiSelectValue placeholder="Select a fruit" />
+    </UiSelectTrigger>
+    <UiSelectContent>
+      <UiSelectItem value="apple"> Apple </UiSelectItem>
+      <UiSelectItem value="banana"> Banana </UiSelectItem>
+      <UiSelectItem value="blueberry"> Blueberry </UiSelectItem>
+      <UiSelectItem value="grapes"> Grapes </UiSelectItem>
+      <UiSelectItem value="pineapple"> Pineapple </UiSelectItem>
+    </UiSelectContent>
+  </UiSelect>
 </template>
