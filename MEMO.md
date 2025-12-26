@@ -4,9 +4,6 @@
 
 ## メモ
 
-- https://zenn.dev/comm_vue_nuxt/articles/nuxt-use-fetch-guide
-- ページネーション想定でクエリ変化時にデータ再取得するような使い方調べる
-
 - vee-validate
 - マークダウンのプレビューしたい
 
@@ -17,3 +14,5 @@
 - エラーハンドリングしたい
   - https://nuxt.com/docs/4.x/getting-started/error-handling#error-utils
 - useFetch の使い方間違ってそうだから調べる
+- https://zenn.dev/comm_vue_nuxt/articles/nuxt-use-fetch-guide
+- ページネーション想定でクエリ変化時にデータ再取得するような使い方調べる

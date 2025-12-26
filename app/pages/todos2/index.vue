@@ -1,8 +1,22 @@
 <script setup lang="ts">
+import { watch, ref } from "vue";
 import { useTodos2, useTodo } from "~/composables/useTodos";
 
-const { getTodos } = useTodos2();
+// const params = ref<{ keyword?: string }>({});
+const inputText = ref("");
+
+const { params, getTodos } = useTodos2();
+// params.value = {
+//   keyword: "hoge",
+// };
 const { data, pending, refresh } = await getTodos();
+
+watch(inputText, () => {
+  params.value = {
+    keyword: inputText.value,
+  };
+  // refresh(); // 不要: queryがリアクティブなので自動再フェッチ
+});
 
 const { putTodo, deleteTodo } = useTodo2();
 
@@ -39,7 +53,9 @@ const onDelete = async (id: number) => {
 </script>
 
 <template>
-  <!-- <p><button @click="refresh()">再読み込み</button></p> -->
+  <p><button @click="refresh()">再読み込み</button></p>
+  <p><input type="text" v-model="inputText" /></p>
+  <p>{{ inputText }}</p>
   <template v-if="pending">
     <p>データ読み込み中</p>
   </template>
