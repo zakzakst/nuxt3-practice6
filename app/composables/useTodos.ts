@@ -35,14 +35,10 @@ export const useTodos = () => {
 };
 
 export const useTodos2 = () => {
-  const getTodos = async () => {
-    // const asyncData = useAsyncData<GetTodosResponse>("getTodos", () =>
-    //   $fetch(host("/todos"))
-    // );
-    const asyncData = await useFetch<GetTodosResponse>(host("/todos"), {
+  const getTodos = () => {
+    const asyncData = useFetch<GetTodosResponse>(host("/todos"), {
       key: "getTodos",
     });
-    // console.log("test", asyncData.data.value);
     return asyncData;
   };
 
@@ -91,6 +87,45 @@ export const useTodo = () => {
 
   return {
     todo,
+    getTodo,
+    postTodo,
+    putTodo,
+    deleteTodo,
+  };
+};
+
+export const useTodo2 = () => {
+  const getTodo = (id: number) => {
+    const asyncData = useFetch<GetTodoResponse>(host(`/todos/${id}`), {
+      key: "getTodo",
+    });
+    return asyncData;
+  };
+
+  const postTodo = (request: PostTodoRequest): Promise<PostTodoResponse> => {
+    const asyncData = $fetch<PostTodoResponse>(host("/todos"), {
+      method: "POST",
+      body: request,
+    });
+    return asyncData;
+  };
+
+  const putTodo = (id: number, request: PutTodoRequest) => {
+    const asyncData = $fetch<PutTodoResponse>(host(`/todos/${id}`), {
+      method: "PUT",
+      body: request,
+    });
+    return asyncData;
+  };
+
+  const deleteTodo = (id: number) => {
+    const asyncData = $fetch<null>(host(`/todos/${id}`), {
+      method: "DELETE",
+    });
+    return asyncData;
+  };
+
+  return {
     getTodo,
     postTodo,
     putTodo,

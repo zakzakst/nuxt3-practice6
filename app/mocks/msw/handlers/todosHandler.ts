@@ -34,7 +34,7 @@ export const todosHandler = [
     ({ params }) => {
       const { id } = params;
       console.log(`id: ${id}`);
-      const status: number = 200;
+      const status: number = 404;
       if (status === 200) {
         return HttpResponse.json(GetTodoResponseMock, { status: 200 });
       }
@@ -57,7 +57,7 @@ export const todosHandler = [
     async ({ request }) => {
       const requestData = await request.clone().json();
       console.log(`requestData: ${requestData}`);
-      const status: number = 201;
+      const status: number = 500;
       if (status === 201) {
         return HttpResponse.json(PostTodoResponseMock, { status: 201 });
       }
@@ -76,7 +76,7 @@ export const todosHandler = [
       console.log(`id: ${id}`);
       const requestData = await request.clone().json();
       console.log(`requestData: ${requestData}`);
-      const status: number = 200;
+      const status: number = 404;
       if (status === 200) {
         return HttpResponse.json(PutTodoResponseMock, { status: 200 });
       }
@@ -99,7 +99,7 @@ export const todosHandler = [
     ({ params }) => {
       const { id } = params;
       console.log(`id: ${id}`);
-      const status: number = 204;
+      const status: number = 404;
       if (status === 204) {
         // DELETE成功時はボディなしが一般的
         return HttpResponse.json(null, { status: 204 });
