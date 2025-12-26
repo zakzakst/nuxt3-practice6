@@ -10,7 +10,7 @@ import type {
 } from "~/types/todos";
 import { ref } from "vue";
 // import { useFetch } from "nuxt/app";
-import { useAsyncData } from "nuxt/app";
+import { useAsyncData, useFetch } from "nuxt/app";
 import { host } from "~/utils/host";
 // import { useHost as host } from "~/composables/useHost";
 
@@ -30,6 +30,23 @@ export const useTodos = () => {
 
   return {
     todos,
+    getTodos,
+  };
+};
+
+export const useTodos2 = () => {
+  const getTodos = () => {
+    // const asyncData = useAsyncData<GetTodosResponse>("getTodos", () =>
+    //   $fetch(host("/todos"))
+    // );
+    const asyncData = useFetch<GetTodosResponse>(host("/todos"), {
+      key: "getTodos",
+    });
+    console.log("test", asyncData.data.value);
+    return asyncData;
+  };
+
+  return {
     getTodos,
   };
 };

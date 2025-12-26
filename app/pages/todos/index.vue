@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted, computed, watch, ref } from "vue";
-import { useTodos } from "~/composables/useTodos";
+import { useTodos2 } from "~/composables/useTodos";
 
-const { todos, getTodos } = useTodos();
+const { getTodos } = useTodos2();
 
 // const todosComputed = computed(() => todos.value);
 
@@ -10,22 +10,28 @@ const { todos, getTodos } = useTodos();
 //   console.log("watch");
 // });
 
+const { data, pending, refresh } = getTodos();
+
 onMounted(() => {
-  getTodos();
+  refresh();
 });
 </script>
 
 <template>
   <!-- <p>{{ JSON.stringify(todos) }}</p>
   <p>{{ JSON.stringify(todos?.length) }}</p> -->
-  <template v-if="todos?.length">
+  <p><button @click="refresh()">再読み込み</button></p>
+  <template v-if="pending">
+    <p>データ読み込み中</p>
+  </template>
+  <template v-else-if="data?.items.length">
     <ul>
-      <li v-for="todo in todos" :key="todo.id">
-        <NuxtLink :href="`/todos/${todo.id}`">{{ todo.title }}</NuxtLink>
+      <li v-for="item in data.items" :key="item.id">
+        <NuxtLink :href="`/todos/${item.id}`">{{ item.title }}</NuxtLink>
       </li>
     </ul>
   </template>
   <template v-else>
-    <p>データ読み込み中</p>
+    <p>データが見つかりませんでした</p>
   </template>
 </template>
