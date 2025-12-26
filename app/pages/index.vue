@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
+import UiInput from "~/components/ui/input/UiInput.vue";
 import { useTodos, useTodo } from "~/composables/useTodos";
 
 const { todos, getTodos } = useTodos();
 const { todo, getTodo, postTodo, putTodo, deleteTodo } = useTodo();
+
+const inputValue = ref("");
 
 onMounted(() => {
   getTodos();
@@ -21,4 +24,8 @@ onMounted(() => {
     <button @click="deleteTodo(1)">delete</button>
   </div>
   <div>{{ JSON.stringify(todo) }}</div>
+  <UiButton variant="secondary" size="lg">test</UiButton>
+  <UiInput v-model="inputValue" />
+  <div>{{ inputValue }}</div>
+  <!-- <Button>test</Button> -->
 </template>
