@@ -35,14 +35,14 @@ export const useTodos = () => {
 };
 
 export const useTodos2 = () => {
-  const getTodos = () => {
+  const getTodos = async () => {
     // const asyncData = useAsyncData<GetTodosResponse>("getTodos", () =>
     //   $fetch(host("/todos"))
     // );
-    const asyncData = useFetch<GetTodosResponse>(host("/todos"), {
+    const asyncData = await useFetch<GetTodosResponse>(host("/todos"), {
       key: "getTodos",
     });
-    console.log("test", asyncData.data.value);
+    // console.log("test", asyncData.data.value);
     return asyncData;
   };
 

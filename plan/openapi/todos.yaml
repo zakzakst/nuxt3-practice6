@@ -45,7 +45,7 @@ paths:
                   type: string
                   format: date-time
       responses:
-        "200":
+        "201":
           description: データ登録成功
           content:
             application/json:
@@ -128,7 +128,7 @@ paths:
                     - progress
                     - planned
       responses:
-        "200":
+        "201":
           description: データ更新成功
           content:
             application/json:
