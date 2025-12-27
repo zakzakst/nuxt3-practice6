@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import { useTodos, useTodo } from "~/composables/useTodos";
 import { CheckCircle2Icon } from "lucide-vue-next";
+import { toast } from "vue-sonner";
 
 const { todos, getTodos } = useTodos();
 const { todo, getTodo, postTodo, putTodo, deleteTodo } = useTodo();
@@ -140,4 +141,82 @@ onMounted(() => {
       </UiAccordionContent>
     </UiAccordionItem>
   </UiAccordion>
+  <UiAspectRatio :ratio="16 / 9" class="bg-muted rounded-lg">
+    <img
+      src="https://placehold.jp/150x150.png"
+      alt="Photo by Drew Beamer"
+      fill
+      class="h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
+    />
+  </UiAspectRatio>
+  <UiAvatar>
+    <UiAvatarImage src="https://github.com/shadcn.png" />
+    <UiAvatarFallback>CN</UiAvatarFallback>
+  </UiAvatar>
+  <UiSlider :default-value="[33]" :max="100" :step="1" />
+  <UiSkeleton class="w-25 h-5 rounded-full" />
+  <UiPopover>
+    <UiPopoverTrigger>Open</UiPopoverTrigger>
+    <UiPopoverContent>Place content for the popover here.</UiPopoverContent>
+  </UiPopover>
+  <UiScrollArea class="h-50 w-87.5 rounded-md border p-4">
+    Jokester began sneaking into the castle in the middle of the night and
+    leaving jokes all over the place: under the king's pillow, in his soup, even
+    in the royal toilet. The king was furious, but he couldn't seem to stop
+    Jokester. And then one day, the king tripped over one of Jokester's whoopee
+    cushions and fell into the moat. He was so embarrassed that he decided to
+    make Jokester the official court jester.
+  </UiScrollArea>
+  <UiTooltipProvider>
+    <UiTooltip>
+      <UiTooltipTrigger>Hover</UiTooltipTrigger>
+      <UiTooltipContent>
+        <p>Add to library</p>
+      </UiTooltipContent>
+    </UiTooltip>
+  </UiTooltipProvider>
+  <UiButton @click.prevent="toast('Event has been created')">Sonner</UiButton>
+  <UiNativeSelect>
+    <UiNativeSelectOption value=""> Select a fruit </UiNativeSelectOption>
+    <UiNativeSelectOption value="apple"> Apple </UiNativeSelectOption>
+    <UiNativeSelectOption value="banana"> Banana </UiNativeSelectOption>
+    <UiNativeSelectOption value="blueberry"> Blueberry </UiNativeSelectOption>
+    <UiNativeSelectOption value="grapes" disabled>
+      Grapes
+    </UiNativeSelectOption>
+    <UiNativeSelectOption value="pineapple"> Pineapple </UiNativeSelectOption>
+  </UiNativeSelect>
+  <UiAlertDialog>
+    <UiAlertDialogTrigger>Open</UiAlertDialogTrigger>
+    <UiAlertDialogContent>
+      <UiAlertDialogHeader>
+        <UiAlertDialogTitle>Are you absolutely sure?</UiAlertDialogTitle>
+        <UiAlertDialogDescription>
+          This action cannot be undone. This will permanently delete your
+          account and remove your data from our servers.
+        </UiAlertDialogDescription>
+      </UiAlertDialogHeader>
+      <UiAlertDialogFooter>
+        <UiAlertDialogCancel>Cancel</UiAlertDialogCancel>
+        <UiAlertDialogAction>Continue</UiAlertDialogAction>
+      </UiAlertDialogFooter>
+    </UiAlertDialogContent>
+  </UiAlertDialog>
+  <UiDrawer>
+    <UiDrawerTrigger>Open</UiDrawerTrigger>
+    <UiDrawerContent>
+      <UiDrawerHeader>
+        <UiDrawerTitle>Are you absolutely sure?</UiDrawerTitle>
+        <UiDrawerDescription>
+          This action cannot be undone.
+        </UiDrawerDescription>
+      </UiDrawerHeader>
+      <UiDrawerFooter>
+        <UiButton>Submit</UiButton>
+        <UiDrawerClose>
+          <UiButton variant="outline"> Cancel </UiButton>
+        </UiDrawerClose>
+      </UiDrawerFooter>
+    </UiDrawerContent>
+  </UiDrawer>
 </template>
