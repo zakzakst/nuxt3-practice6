@@ -6,6 +6,8 @@
 
 - vee-validate
 - マークダウンのプレビューしたい
+- 下記使ってみる
+  https://nuxt.com/modules/vueuse
 
 ## 済
 
