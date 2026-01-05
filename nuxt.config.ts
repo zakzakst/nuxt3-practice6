@@ -7,6 +7,19 @@ export default defineNuxtConfig({
   css: ["./app/assets/css/global.css"],
   vite: {
     plugins: [tailwindcss()],
+    vue: {
+      features: {
+        optionsAPI: false,
+      },
+    },
+    build: {
+      terserOptions: {
+        compress: {
+          drop_console: process.env.NODE_ENV === "production",
+          drop_debugger: process.env.NODE_ENV === "production",
+        },
+      },
+    },
   },
   runtimeConfig: {
     public: {
